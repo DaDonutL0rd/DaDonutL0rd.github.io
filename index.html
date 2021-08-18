@@ -1,0 +1,154 @@
+<html>
+<head>
+  <style>
+  .sectionLeft {
+    float: left;
+    width: 80%;
+  }
+  .sectionRight {
+    float: right;
+    width: 20%;
+
+  }
+  .scoreContainer {
+    background-color: rgb(238, 238, 238);
+    width: 38%;
+    padding: 10px;
+    border-radius: 70px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  clickerContainer img {
+    position: relative;
+    transition: all .2s ease-in-out;
+  }
+  clickerContainer img:hover { transform: scale(2); }
+  clickerContainer img:active { transform: scale(0.99); }
+.shopButton {
+  background-color: #b5b5b5;
+  transition: all .2s ease-in-out;
+  border-radius: 10px;
+  width: 100%;
+  margin: 10px 0px 10px 0px;
+}
+.shopButton:hover {
+  background-color: c7c7c7;
+  transition: 0.2s ease-in-out;
+}
+
+.shopButton #image {
+  width: 25%;
+}
+.shopButton img {
+  width: 64px;
+  height: 64px;
+}
+.shopButton #nameAndCost p {
+  margin: 0px;
+  width: 60%;
+}
+.shopButton #nameAndCost p:first-of-type{
+  font-size: 24px;
+}
+.shopButton #amount {
+  font-size: 48px;
+  color: 595959;
+  font-family: roboto;
+  width: 15%;
+}
+
+  </style>
+  <title>
+Lemonade Stand
+  </title>
+</head>
+<body>
+<div class="sectionLeft">
+  <center>
+    <div class="scoreContainer">
+  $<span id="score">0 </span><br>
+  $<span id="$persecond">0 </span>per second<br>
+</div>
+
+    <br><br>
+    <div class="clickerContainer">
+  <img src="lemonade stand.png" height="256" width="256" onClick="addToScore(1)"
+</div>
+</center>
+</div>
+
+</body>
+<div class="sectionRight">
+<table class="shopButton" onClick="buySign()">
+<tr>
+<td id="image"><img src="sign.png" height="100" width="100"></td>
+<td id="nameAndCost">
+  <p>Sign</p>
+  <p><span id="signcost">5</span> $</td></p>
+  <td id="amount"><span id="signs">0</span></td>
+</tr>
+</table>
+<table class="shopButton" onClick="buySqueezer()">
+<tr>
+<td id="image"><img src="squeezer.png" height="100" width="100"></td>
+<td id="nameAndCost">
+  <p>Squeezer</p>
+  <p><span id="squeezercost">15</span> $</td></p>
+  <td id="amount"><span id="squeezers">0</span></td>
+</tr>
+</table>
+<div>
+<script>
+var score = 0;
+var squeezerCost = 15;
+var squeezers = 0;
+var signCost = 5;
+var signs = 0;
+
+function buySign() {
+  if (score >= signCost) {
+    score = score - signCost;
+    signs = signs + 1;
+    signCost = Math.round(signCost * 1.15);
+
+    document.getElementById("score").innerHTML = score;
+    document.getElementById("signcost").innerHTML = signCost;
+    document.getElementById("signs").innerHTML = signs;
+updateScorePerSecond();
+  }
+}
+
+
+function addToScore(amount) {
+  score = score + 0.75;
+  document.getElementById("score").innerHTML = score;
+}
+
+function buySqueezer() {
+  if (score >= squeezerCost) {
+    score = score - squeezerCost;
+    squeezers = squeezers + 1;
+    squeezerCost = Math.round(squeezerCost * 2.15);
+
+
+document.getElementById("score").innerHTML = score;
+document.getElementById("squeezercost").innerHTML = squeezerCost;
+document.getElementById("squeezers").innerHTML = squeezers;
+updateScorePerSecond();
+  }
+}
+setInterval (function() {
+  score = score + signs * 1;
+  score = score + squeezers * 1;
+  document.getElementById("score").innerHTML = score;
+  document.title = score + "$ - Lemonade Stand"
+}, 1000);
+
+function updateScorePerSecond() {
+  $persecond = signs + squeezers * 5;
+  document.getElementById("$persecond").innerHTML = $persecond;
+
+}
+
+</script>
+</html>
